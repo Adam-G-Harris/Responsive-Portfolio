@@ -27,6 +27,7 @@ body {
 	position: absolute;
 	top: 27%;
 	right: -38%;
+	z-index: -10;
 }
 
 .nav-bar {
@@ -475,4 +476,9 @@ body {
 	background-color: rgb(27, 27, 27);
 }
 
-/* ---------- Default HTML Tags ---------- */
+#canvas {
+	top: 0;
+	left: 0;
+	z-index: -1;
+	position: absolute;
+}
