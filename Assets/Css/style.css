@@ -326,6 +326,36 @@ body {
 	border: 1px solid black;
 }
 
+.progress-amount {
+	height: 100%;
+	border-radius: inherit;
+	background-color: purple;
+}
+
+.inner-progress-css {
+	width: 84%;
+}
+
+.inner-progress-sass {
+	width: 62%;
+}
+
+.inner-progress-html {
+	width: 92%;
+}
+
+.inner-progress-pug {
+	width: 48%;
+}
+
+.inner-progress-javascript {
+	width: 85%;
+}
+
+.inner-progress-vue {
+	width: 63%;
+}
+
 .skill {
 	width: 10vh;
 	height: 10vh;
