@@ -1,27 +1,60 @@
 window.onload = () => {
 
-	// Global variables
+	AOS.init();
 
-	let canvasContainer = document.getElementById('canvas-container'),
-		canvas = document.getElementById('canvas'),
+	/*// Global variables
+
+	let canvas = document.getElementById('canvas'),
 		ctx = canvas.getContext('2d'),
-		maxNumberOfOrbs = 10,
-		activeOrbs = [new Orb(100, 100, 50)];
+		activeOrbs = [];
 
 	// Orb constructor function
 
-	function Orb(x, y, r) {
+	function Orb(x, y, r, xV, yV) {
 		this.x = x;
 		this.y = y;
 		this.r = r;
-		this.g = 1.1;
+		this.xV = xV;
+		this.yV = yV;
+	}
+
+	// Creating orb positions
+
+	function makeOrbs() {
+		let r, x, y, orb, xVelocity, yVelocity;
+		for (let i = 0; i < 100; i++) {
+			r = randomInt(10, 20);
+			x = randomInt(r, document.body.clientWidth - r);
+			y = randomInt(r, document.body.clientHeight - r);
+			xVelocity = randomInt(-2, 2);
+			yVelocity = randomInt(-2, 2);
+			if (i === 0) {
+				orb = new Orb(x, y, r, xVelocity, yVelocity);
+				activeOrbs.push(orb);
+			} else {
+				activeOrbs.forEach(item => {
+					if (getDistance(x, y, item.x, item.y) < (r + item.r)) {
+						console.log('They touching!');
+					} else {
+						; (function temp() {
+							if (getDistance(x, y, item.x, item.y) > (r + item.r + 300)) {
+								console.log('< 300')
+							} else {
+								console.log('> 300')
+							}
+						})();
+						//console.log(getDistance(x, y, item.x, item.y));
+					}
+				});
+			}
+		}
 	}
 
 	// Object prototypes
 
 	Orb.prototype.update = function () {
 		this.draw();
-	};
+	}
 
 	Orb.prototype.draw = function () {
 		ctx.beginPath();
@@ -30,39 +63,50 @@ window.onload = () => {
 		ctx.stroke();
 	}
 
-	// Canvas loop
-
-	function loop() {
-		window.requestAnimationFrame(loop);
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		activeOrbs.forEach(orb => {
-			orb.update();
-		});
-	}
-
-	window.requestAnimationFrame(loop);
-
-	// Canvas pixel aspect ratio handler
-	// Without it, the canvas would look blurry on retina displays
-
-	window.addEventListener('resize', resize, false);
+	// Scales size based on pixel aspect ratio
 
 	function resize() {
-		alert('resize');
 		let sizeX = document.body.clientWidth;
 		let sizeY = document.body.clientHeight;
 		canvas.style.width = `${sizeX}px`;
 		canvas.style.height = `${sizeY}px`;
-		let scale = window.devicePixelRatio;
+		let scale = window.devicePixelRatio || 1;
 		canvas.width = sizeX * scale;
 		canvas.height = sizeY * scale;
-		ctx.scale(scale, scale);
+		ctx.scale(scale, scale)
 	}
 
-	resize();
+	// Checking the distance between two arguments
 
-	// Initializing CSS on-scroll transitions
+	function getDistance(x1, y1, x2, y2) {
+		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+	}
 
-	AOS.init();
+	// Returns a random integer between 2 arguments
+
+	function randomInt(min, max) {
+		return Math.floor(Math.random() * (max - min) + min);
+	}
+
+	// Canvas loop
+
+	function loop() {
+		window.requestAnimationFrame(loop);
+		ctx.clearRect(0, 0, document.body.clientWidth, document.body.clientHeight);
+		/*activeOrbs.forEach(orb => {
+			orb.update();
+		});
+	}
+
+	// Starts all animations on window load
+
+	function init() {
+		window.addEventListener('resize', resize, false);
+		resize(); // Resizes canvas based on aspect ratio
+		makeOrbs(); // Creates properties for x number of orbs
+		loop(); // Clears canvas each frame & calls update function
+	}
+
+	init();*/
 
 };
